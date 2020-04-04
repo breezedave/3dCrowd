@@ -25,7 +25,7 @@ class Photo extends Component {
             <PhotoStyled {...props}>
                 <img
                     className={`image ${state.mouseOver? "mouseOver": ""}`}
-                    src={props.myMedia? props.myMedia.image : "#"}
+                    src={props.myMedia? props.myMedia.thumb : "#"}
                     onMouseOver={this.mouseOver}
                     onMouseOut={this.mouseOut}
                     onClick={this.mouseOver}

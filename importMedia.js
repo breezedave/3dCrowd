@@ -14,8 +14,10 @@ let assetList = "const assetList = [";
 imgFiles.forEach(item => {
     if(item.indexOf(".png") > 0) {
         importStr += `import "../media/images/${item}";\n`;
+        importStr += `import "../media/images/${item.replace(".png", ".jpg")}";\n`;
         assetList += `{
             image: "assets/images/${item}",
+            thumb: "assets/images/${item.replace(".png", ".jpg")}",
             seed: ${Math.random()},
         },
         `;
@@ -27,9 +29,11 @@ videoFiles.forEach(item => {
     if(item.indexOf(".mp4") > 0) {
         importStr += `import "../media/video/${item}";\n`;
         importStr += `import "../media/images/${item.replace(".mp4", ".png")}";\n`;
+        importStr += `import "../media/images/${item.replace(".mp4", ".jpg")}";\n`;
         assetList += `{
             video: "assets/video/${item}",
             image: "assets/images/${item.replace(".mp4", ".png")}",
+            thumb: "assets/images/${item.replace(".mp4", ".jpg")}",
             seed: ${Math.random()},
         },
         `;
