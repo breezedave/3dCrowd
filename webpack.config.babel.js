@@ -43,8 +43,19 @@ module.exports = {
                         loader: "file-loader",
                         options: {
                             name: "[name].[ext]",
-                            outputPath: path.resolve(__dirname, "output", "public", "img"),
-                            publicPath: path.resolve(__dirname, "output", "public", "img"),
+                            outputPath: "assets/images",
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(mp4)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "assets/video",
                         },
                     },
                 ],

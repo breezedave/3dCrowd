@@ -1,12 +1,14 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-import Page from "./Page/Page";
+import Gallery from "./Gallery/Gallery";
+import GlobalStyling from "./global.styled";
 
 ReactDOM.render(
     <Fragment>
-        <Page
-            photoSize={80}
-            gapSize={4} 
+        <GlobalStyling />
+        <Gallery
+            photoSize={60}
+            gapSize={6}
         />
     </Fragment>,
     document.getElementById("root")
