@@ -5,7 +5,7 @@ const GalleryStyled = styled.div`
     grid-gap: ${props => props.gapSize}px;
     grid-template-columns: ${props => props.gridTemplateCols};
     grid-template-rows: ${props => props.gridTemplateRows};
-    width: 90vw;
+    width: ${props => props.maxWidth}px;
     max-width: 90vw;
     max-height: 90vh;
     height: 90vh;
