@@ -16,7 +16,6 @@ class Gallery extends Component {
 
         document.body.onresize = () => {
             self.resize();
-            window.photoSize = screen.availHeight * screen.availWidth < 400000? 40: 60;
         }
 
         this.mediaList = mediaList.sort((a,b) => a.seed - b.seed);
@@ -24,6 +23,15 @@ class Gallery extends Component {
 
     componentDidMount() {
         this.resize();
+    }
+
+    next = () => {
+        this.setState({startImagesAt: this.state.startImagesAt + this.state.photoSlots});
+    }
+
+    prev = () => {
+        const imageI = this.state.startImagesAt - this.state.photoSlots < 0 ? 1000 - this.state.photoSlots : this.state.startImagesAt - this.state.photoSlots;
+        this.setState({startImagesAt: imageI});
     }
 
     resize() {
@@ -103,6 +111,7 @@ class Gallery extends Component {
         const viewerRowStart = Math.floor((rows - viewerRows)/2) + 1
         const viewerRowEnd = viewerRowStart + viewerRows;
         const photos = [];
+        const self = this;
 
         for(let i = 0; i < photoSlots; i++) {
             const myMedia = (startImagesAt+i) % this.mediaList.length;
@@ -130,6 +139,7 @@ class Gallery extends Component {
             >
                 {photos}
                 <Viewer
+                    tabIndex="0"
                     className="viewer"
                     style={{
                         gridColumnStart: viewerColStart,
@@ -139,6 +149,8 @@ class Gallery extends Component {
                     }}
                     viewerPath={viewerPath}
                 />
+                <button className="prev" type="button" onClick={self.prev}></button>
+                <button className="next" type="button" onClick={self.next}></button>
             </GalleryStyled>
         );
     }

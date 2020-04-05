@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "../media/images/vidIcon.svg";
 
 const PhotoStyled = styled.div`
     border-radius: 8px;
@@ -22,6 +23,21 @@ const PhotoStyled = styled.div`
         width: 100%;
         height: 100%;
         opacity: 1;
+    }
+
+    &.isVideo {
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 75%;
+            height: 75%;
+            background: transparent url("assets/images/vidIcon.svg") no-repeat center;
+            background-size: 75% 75%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
     }
 
 `;

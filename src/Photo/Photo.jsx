@@ -22,7 +22,7 @@ class Photo extends Component {
         const {props, state} = this;
 
         return (
-            <PhotoStyled {...props}>
+            <PhotoStyled {...props} className={props.myMedia && props.myMedia.video? "isVideo": ""}>
                 <img
                     className={`image ${state.mouseOver? "mouseOver": ""}`}
                     src={props.myMedia? props.myMedia.thumb : "#"}
