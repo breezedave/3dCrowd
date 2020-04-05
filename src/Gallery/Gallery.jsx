@@ -32,7 +32,6 @@ class Gallery extends Component {
     getSize() {
         const {photoSize, gapSize, minViewerWidth, minViewerHeight} = this.props;
         const gallerySize = document.querySelector("#galleryHold") ? document.querySelector("#galleryHold").getBoundingClientRect(): {width:0, height:0};
-        console.log(gallerySize);
         const cols = Math.floor(gallerySize.width / ((photoSize + gapSize)));
         const rows = Math.floor(gallerySize.height / ((photoSize + gapSize)));
 

@@ -13,6 +13,10 @@ class Page extends Component {
         document.body.onresize = () => {
             self.resize();
         }
+
+        window.addEventListener("orientationchange", () => {
+            self.resize();
+        });
     }
 
     componentDidMount() {
@@ -30,7 +34,7 @@ class Page extends Component {
         return (
             <Fragment>
                 <div className="instructions">
-                    <h1>A COMMUNIY DRIVEN PRODUCT</h1>
+                    <h1>A COMMUNITY DRIVEN PRODUCT</h1>
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLScNRsoECLifQX_j34ug8FHrFj7qbzHs5UX2pridDP7lKG3oXg/viewform" target="_blank">SIGN UP AS A 3DCROWD VOLUNTEER</a>
                     <p>3D PRINTERS SAVE LIVES</p>
                     <p>DO YOU WANT TO HELP PRODUCE FACE SHIELDS FOR FRONTLINE STAFF?</p>

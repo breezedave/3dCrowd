@@ -17,6 +17,7 @@ const GlobalStyled = createGlobalStyle`
         font-size: 2vh;
         margin: .5vh;
         color: #ddd;
+        width: 90vw;
     }
 
     #root {
