@@ -14,34 +14,30 @@ class Gallery extends Component {
 
         const self = this;
 
-        document.body.onresize = () => {
-            self.resize();
-        }
 
         this.mediaList = mediaList.sort((a,b) => a.seed - b.seed);
     }
 
-    componentDidMount() {
-        this.resize();
-    }
-
     next = () => {
-        this.setState({startImagesAt: this.state.startImagesAt + this.state.photoSlots});
+        const {photoSlots} = this.getSize();
+        this.setState({startImagesAt: this.state.startImagesAt + photoSlots});
     }
 
     prev = () => {
-        const imageI = this.state.startImagesAt - this.state.photoSlots < 0 ? 1000 - this.state.photoSlots : this.state.startImagesAt - this.state.photoSlots;
+        const {photoSlots} = this.getSize();
+        const imageI = this.state.startImagesAt - photoSlots < 0 ? 1000 - photoSlots : this.state.startImagesAt - photoSlots;
         this.setState({startImagesAt: imageI});
     }
 
-    resize() {
+    getSize() {
         const {photoSize, gapSize, minViewerWidth, minViewerHeight} = this.props;
         const gallerySize = document.querySelector("#galleryHold") ? document.querySelector("#galleryHold").getBoundingClientRect(): {width:0, height:0};
+        console.log(gallerySize);
         const cols = Math.floor(gallerySize.width / ((photoSize + gapSize)));
         const rows = Math.floor(gallerySize.height / ((photoSize + gapSize)));
 
         const viewerRenderWidth = cols <= minViewerWidth ? (cols * (photoSize + gapSize)) - gapSize: Math.max((minViewerWidth * (photoSize + gapSize)), Math.floor(gallerySize.width * 0.5 / (photoSize + gapSize)) * (photoSize + gapSize) - gapSize);
-        const viewerRenderHeight = rows <= minViewerHeight ? (rows * (photoSize + gapSize)) - gapSize: Math.max((minViewerHeight * (photoSize + gapSize)) - gapSize, Math.floor(viewerRenderWidth * 0.75 / (photoSize + 10)) * (photoSize + gapSize) - gapSize);
+        const viewerRenderHeight = rows <= minViewerHeight ? (rows * (photoSize + gapSize)) - gapSize: Math.max((minViewerHeight * (photoSize + gapSize)) - gapSize, Math.floor(viewerRenderWidth * 0.67 / (photoSize + 10)) * (photoSize + gapSize) - gapSize);
         const viewerRenderSize = {
             viewerRenderWidth,
             viewerRenderHeight,
@@ -65,9 +61,7 @@ class Gallery extends Component {
             gridTemplateRows += ` ${photoSize}px`;
         }
 
-        const maxWidth = (cols * (photoSize + gapSize)) - gapSize;
-
-        this.setState({
+        return {
             gridTemplateCols,
             gridTemplateRows,
             cols,
@@ -77,8 +71,7 @@ class Gallery extends Component {
             viewerRows,
             viewerRenderSize,
             photoSlots,
-            maxWidth,
-        });
+        };
     }
 
     updateViewer = viewerPath => {
@@ -87,6 +80,17 @@ class Gallery extends Component {
 
     render() {
         const {
+            startImagesAt,
+            viewerPath,
+        } = this.state;
+
+        const {
+            maxWidth,
+            photoSize,
+            gapSize,
+        } = this.props;
+
+        const {
             gridTemplateCols,
             gridTemplateRows,
             cols,
@@ -96,15 +100,7 @@ class Gallery extends Component {
             viewerRows,
             viewerRenderSize,
             photoSlots,
-            maxWidth,
-            startImagesAt,
-            viewerPath,
-        } = this.state;
-
-        const {
-            photoSize,
-            gapSize,
-        } = this.props;
+        } = this.getSize();
 
         const viewerColStart = Math.floor((cols - viewerCols)/2) + 1
         const viewerColEnd = viewerColStart + viewerCols;

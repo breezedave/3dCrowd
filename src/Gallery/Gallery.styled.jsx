@@ -9,8 +9,8 @@ const GalleryStyled = styled.div`
     grid-template-rows: ${props => props.gridTemplateRows};
     width: ${props => props.maxWidth}px;
     max-width: 90vw;
-    max-height: 90vh;
-    height: 90vh;
+    max-height: 70vh;
+    height: 70vh;
     margin: 10px auto;
 
     .photo {
